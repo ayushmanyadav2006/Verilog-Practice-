@@ -47,9 +47,9 @@ fa uut(
 .c(c)
 );
 initial begin  
-a=16'd5; b=16'd10; cin=0; #100;
-a=16'd6; b=16'd6;  cin=1; #100;
-a=16'd5; b=16'd6;  cin=1; #100;
+a=16'd1; b=16'd2; cin=0; #100;
+a=16'd2; b=16'd2;  cin=1; #100;
+a=16'd4; b=16'd1;  cin=1; #100;
 
 end
 endmodule
