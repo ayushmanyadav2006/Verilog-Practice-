@@ -1,0 +1,55 @@
+
+
+//main code
+module a(
+a,b,cin,s,c
+    );
+input [3:0] a,b;
+input cin;//e;
+output [3:0] s;
+output c;
+wire c1,c2,c3;
+assign s[0]=a[0]^b[0]^cin;
+assign c1=(a[0]&b[0])|(a[0]&cin)|(b[0]&cin);
+assign s[1]=a[1]^b[1]^c1;
+assign c2=(a[1]&b[1])|(a[1]&c1)|(b[1]&c1);
+assign s[2]=a[2]^b[2]^c2;
+assign c3=(a[2]&b[2])|(a[2]&c2)|(b[2]&c2);
+assign s[3]=a[3]^b[3]^c3;
+assign c=(a[3]&b[3])|(a[3]&c3)|(b[3]&c3);
+endmodule
+
+module fa(a,b,cin,s,c);
+input [15:0] a,b;
+input cin;
+output [15:0] s;
+output c;
+wire c1,c2,c3;
+a a0(a[3:0],b[3:0],cin,s[3:0],c1);
+a a1(a[7:4],b[7:4],c1,s[7:4],c2);
+a a2(a[11:8],b[11:8],c2,s[11:8],c3);
+a a3(a[15:12],b[15:12],c3,s[15:12],c);
+endmodule
+
+
+//testbench 
+module tb;
+reg [15:0] a,b;
+reg cin;//e;
+wire [15:0]s;
+wire c;
+fa uut(
+.a(a),
+.b(b),
+.cin(cin),
+//.e(e),
+.s(s),
+.c(c)
+);
+initial begin  
+a=16'd5; b=16'd10; cin=0; #100;
+a=16'd6; b=16'd6;  cin=1; #100;
+a=16'd5; b=16'd6;  cin=1; #100;
+
+end
+endmodule
